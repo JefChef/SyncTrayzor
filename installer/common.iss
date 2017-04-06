@@ -9,7 +9,7 @@
 #define AppURL "https://github.com/canton7/SyncTrayzor"
 #define AppDataFolder "SyncTrayzor"
 #define RunRegKey "Software\Microsoft\Windows\CurrentVersion\Run"
-#define DotNetInstallerExe "dotNet451Setup.exe"
+#define DotNetInstallerExe "dotNet462Setup.exe"
 #define DonateUrl = "https://synctrayzor.antonymale.co.uk/donate"
 
 [Setup]
@@ -85,13 +85,14 @@ Filename: "{app}\{#AppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(
 var
   GlobalRestartRequired: boolean;
 
+// See https://msdn.microsoft.com/en-us/library/hh925568.aspx#net_d
 function DotNetIsMissing(): Boolean;
 var 
   Exists: Boolean;
   Release: Cardinal;
 begin
   Exists := RegQueryDWordValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full', 'Release', Release);
-  Result := not Exists or (Release < 378758);
+  Result := not Exists or (Release < 394802);
 end;
 
 // Adapted from https://blogs.msdn.microsoft.com/davidrickard/2015/07/17/installing-net-framework-4-5-automatically-with-inno-setup/
