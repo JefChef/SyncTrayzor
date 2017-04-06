@@ -11,6 +11,7 @@ using SyncTrayzor.Services;
 using SyncTrayzor.Properties;
 
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SyncTrayzor.Pages
 {
@@ -377,10 +378,6 @@ namespace SyncTrayzor.Pages
             return true;
         }
 
-        void IRequestHandler.OnResourceRedirect(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, ref string newUrl)
-        {
-        }
-
         bool IRequestHandler.OnProtocolExecution(IWebBrowser browserControl, IBrowser browser, string url)
         {
             return false;
@@ -401,6 +398,15 @@ namespace SyncTrayzor.Pages
         }
 
         void IRequestHandler.OnResourceLoadComplete(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response, UrlRequestStatus status, long receivedContentLength)
+        {
+        }
+
+        bool IRequestHandler.OnSelectClientCertificate(IWebBrowser browserControl, IBrowser browser, bool isProxy, string host, int port, X509Certificate2Collection certificates, ISelectClientCertificateCallback callback)
+        {
+            return false;
+        }
+
+        void IRequestHandler.OnResourceRedirect(IWebBrowser browserControl, IBrowser browser, IFrame frame, IRequest request, IResponse response, ref string newUrl)
         {
         }
 
